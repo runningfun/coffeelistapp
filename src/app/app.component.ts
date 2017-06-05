@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Coffee list app works!';
-  user = 'Stefan'
+  user: UserComponent = {
+    id: 1,
+    name: 'Stefan'
+  }
 }
