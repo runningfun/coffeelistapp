@@ -1,30 +1,38 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { UserComponent } from './user/user.component';
+import {UserService} from "./user/user.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [UserService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+
   title = 'Coffee list app works!';
-  users = USERS;
+  users : UserComponent[];
   selectedUser: UserComponent;
-  user: UserComponent = {
-    id: 1,
-    name: 'Stefan'
+  constructor(private userService: UserService) { }
+
+  getUsers(): void {
+    this.users=this.userService.getUsers();
   }
-  user2: UserComponent = {
-    id: 2,
-    name: 'Stefan2'
+
+  ngOnInit(): void {
+    this.getUsers();
   }
+  // user: UserComponent = {
+  //   id: 1,
+  //   name: 'Stefan'
+  // }
+  // user2: UserComponent = {
+  //   id: 2,
+  //   name: 'Stefan2'
+  // }
 
   onSelect(user: UserComponent): void {
     this.selectedUser = user;
   }
 }
-
-const USERS: UserComponent[]=[
-  {id:1, name: 'test'},
-  {id:2, name: 'bla'}
-];
